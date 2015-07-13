@@ -1,23 +1,44 @@
 "use strict";
 
+
 /*
-* ±âº» ½ºÆå
-* ¿µ¿ª ¸¸µé±â : ½ºÅ×ÀÌÁö, ´ÙÀ½ºí·°, Á¡¼ö ³ëÃâ
-* ÄÁÆ®·Ñ : ½ºÆäÀÌ½º, »óÇÏÁÂ¿ì,
-* Á¡¼ö µ¥ÀÌÅÍ : Á¡¼ö
-* ºí·° Á¤º¸ : 7°³ ¿µ¿ª
-* ¹İº¹ : ÃÊ±âÈ­, °ÔÀÓ ·çÇÎ, ¼Óµµ
-*
-* */
+ * ê¸°ë³¸ ìŠ¤í™
+ * ì˜ì—­ ë§Œë“¤ê¸° : ìŠ¤í…Œì´ì§€, ë‹¤ìŒë¸”ëŸ­, ì ìˆ˜ ë…¸ì¶œ
+ * ì»¨íŠ¸ë¡¤ : ìŠ¤í˜ì´ìŠ¤, ìƒí•˜ì¢Œìš°,
+ * ì ìˆ˜ ë°ì´í„° : ì ìˆ˜
+ * ë¸”ëŸ­ ì •ë³´ : 7ê°œ ì˜ì—­
+ * ë°˜ë³µ : ì´ˆê¸°í™”, ê²Œì„ ë£¨í•‘, ì†ë„
+ *
+ * */
+
 
 var tetris = tetris || {};
 
 tetris.looping = function(){
-    console.log(this);
+    this.init();
+    this.key();
+    this.loop();
 };
 
 tetris.looping.prototype = {
+    init:function(){
+        var stage = document.getElementsByClassName('stage');
+        var stagebg = document.createElement('div');
+        var i = 0, j= 0;
+        stagebg.classList.add('stage_bg');
+
+        for (i; i<20; i++) {
+            for (j; j<10; j++) {
+                stage[0].appendChild(stagebg);
+            }
+        }
+    },
     loop:function(){
         console.log('asfdasdf');
+    },
+    key:{
+
     }
 };
+
+var tetris = new tetris.looping();
