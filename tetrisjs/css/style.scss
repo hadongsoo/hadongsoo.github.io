@@ -1,0 +1,88 @@
+@import "import";
+
+body {
+	background-color: #eee;
+}
+.wrap {
+	width: 500px;
+	margin: 0 auto;
+
+	.stage {
+		position: relative;
+		float: left;
+		width:200px;
+		height:400px;
+		margin:20px;
+		border:1px solid #ccc;
+		background-color: #fff;
+		overflow:hidden;
+
+		.grid {
+			float: left;
+			width: 20px;
+			height: 20px;
+			border: 1px solid #efefef;
+			border-top:0;
+			border-left:0;
+			box-sizing: border-box;
+
+		}
+	}
+	.sidebar {
+		float: left;
+		width: 100px;
+		padding:20px 0 0 0;
+
+		.nextblock {
+			position: relative;
+			width:100px;
+			height:100px;
+			border: 1px solid #ccc;
+			background-color: #fff;
+		}
+		.scoreboard {
+			width:100px;
+			height:50px;
+			margin:20px 0 0 0;
+			background-color: #fff;
+			font-weight: bold;
+			font-family: georgia;
+			font-size:20px;
+		}
+		.information {
+			width:100px;
+			height:208px;
+			margin:20px 0 0 0;
+			background-color: #fff;
+		}
+	}
+}
+#next,
+#handle {
+	position: absolute;
+	width:80px;
+	height:80px;
+	background: transparent;
+	top:0;
+	left:0;
+
+
+	div {
+		width:20px;
+		height:20px;
+		display:block;
+		float:left;
+	}
+	.none {
+		background: transparent;
+	}
+	.color {
+		&.cyan { background-color:cyan;}
+		&.blue { background-color:blue;}
+		&.orange { background-color:orange;}
+		&.yellow { background-color:yellow;}
+		&.green { background-color:green;}
+		&.purple { background-color:purple;}
+		&.red { background-color:red;}
+	}
+}
