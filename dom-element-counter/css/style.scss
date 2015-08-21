@@ -1,0 +1,31 @@
+table {
+	border-collapse: collapse;
+
+	td { border:1px solid #ccc;}
+
+}
+$blob_color:#ccc;
+.blob {
+	display: inline-block;
+	position: relative;
+	background-color: $blob_color;
+	font-size:11px;
+	padding:5px;
+	min-width:40px;
+	text-align: center;
+	height:15px;
+	line-height:15px;
+
+
+	&:after {
+		content:"";
+		position: absolute;
+		left:50%;
+		top:27px;
+		margin-left:-6px;
+		margin-top:-2px;
+		border-left: 8px solid white;
+		border-right: 8px solid white;
+		border-top: 10px solid $blob_color;
+	}
+}
