@@ -19,11 +19,9 @@ hd.tetris = function (){
     this.init();
     this.area();
     this.renderingGrid();
-    //console.log(this.gamefunc.randomNext());
     this.evKbd();
     this.stateBlock();
     this.scoreCalc();
-    //console.log(hd.tetris.blockdata.i);
     //this.looping();
 };
 hd.tetris.blockdata = {
@@ -60,6 +58,12 @@ hd.tetris.prototype = {
         this.handle = document.querySelector('#handle');
         this.next = document.querySelector('#next');
         this.scoreboard = document.querySelector('.scoreboard');
+
+        //console.log(this.staging.offsetLeft);
+        //console.log(this.staging.offsetTop);
+        //console.log(this.staging.offsetTop+this.staging.offsetHeight);
+        //console.log(this.staging.offsetLeft+this.staging.offsetWidth);
+        //console.log(this.handle.offsetTop, this.handle.offsetLeft);
     },
     state:{
         playing:false,
@@ -129,6 +133,7 @@ hd.tetris.prototype = {
     renderingBlock:function(which, what){
         var that = this;
         var blockOne = null;
+
         handle.setAttribute('data-block',that.state.now);
 
         for (var sero = 0; sero < 4; sero ++ ){
@@ -209,11 +214,40 @@ hd.tetris.prototype = {
             var that = this;
             var lasttop = handle.offsetTop;
             var lastleft = handle.offsetLeft;
+            var colortop = null;
+            var colorleft = null;
 
-            var data = 'top: '+(lasttop+x)+'px; left: '+(lastleft+y)+'px;';
-            handle.setAttribute('style',data);
+            //for(var i = 0; i<handle.childNodes.length; i++){
+            //    if (handle.childNodes[i].classList.contains('color')){
+            //        console.log(handle.childNodes[i].offsetLeft, 'offsetLeft');
+            //
+            //    }
+            //}
 
-            this.isInStage();
+            // 스테이지 정보
+            console.log(handle.offsetParent.offsetLeft, handle.offsetParent.offsetLeft+handle.offsetParent.offsetLeft+handle.offsetParent.offsetWidth, handle.offsetParent.offsetTop, handle.offsetParent.offsetTop+handle.offsetParent.offsetHeight);
+
+
+
+            var colors = document.querySelectorAll('.color');
+            var minLeft = 0,
+                maxLeft = 0;
+            var arrNum = [];
+
+            for (var i = 1; i <= colors.length; i++) {
+                arrNum[i] = parseInt(colors[i-1].offsetLeft);
+                //console.log(colors[i-1].offsetParent.offsetLeft);
+                //console.log(colors[i-1].offsetLeft);
+            }
+            arrNum.sort();
+            var objWidth = arrNum[arrNum.length-2] - arrNum[0];
+
+
+
+            if (this.isInStage()) {
+                var data = 'top: '+(lasttop+x)+'px; left: '+(lastleft+y)+'px;';
+                handle.setAttribute('style',data);
+            }
 
         },
         blockMovingNext:function(x,y){
@@ -225,47 +259,71 @@ hd.tetris.prototype = {
             return array[Math.floor(Math.random()*7)];
         },
         isInStage:function(){
-            var whatblock = handle.getAttribute('data-block');
-            switch (whatblock){
-                case 'i':
-                    if (parseInt(handle.style.left) < -20 || parseInt(handle.style.left) > 160) {
-                        console.log('out');
-                    }
-                    break;
-                case 'j':
-                    if (parseInt(handle.style.left) < 0 || parseInt(handle.style.left) > 160) {
-                        console.log('out');
-                    }
-                    break;
-                case 'l':
-                    if (parseInt(handle.style.left) < -20 || parseInt(handle.style.left) > 140) {
-                        console.log('out');
-                    }
-                    break;
-                case 'o':
-                    if (parseInt(handle.style.left) < 0 || parseInt(handle.style.left) > 160) {
-                        console.log('out');
-                    }
-                    break;
-                case 's':
-                    if (parseInt(handle.style.left) < 0 || parseInt(handle.style.left) > 140) {
-                        console.log('out');
-                    }
-                    break;
-                case 't':
-                    if (parseInt(handle.style.left) < 0 || parseInt(handle.style.left) > 140) {
-                        console.log('out');
-                    }
-                    break;
-                case 'z':
-                    if (parseInt(handle.style.left) < 0 || parseInt(handle.style.left) > 140) {
-                        console.log('out');
-                    }
-                    break;
-            }
+            //console.log(handle.childNodes);
+
+            //for(var i = 0; i<handle.childNodes.length; i++){
+            //    if (handle.childNodes[i].classList.contains('color')){
+            //        console.log(parseInt(handle.childNodes[i].offsetLeft));
+            //        console.log(parseInt(handle.childNodes[i].offsetLeft) > 0);
+            //
+            //        //if (parseInt(handle.childNodes[i].offsetLeft) > 0) {
+            //        //    return true;
+            //        //}
+            //
+            //        //console.log(handle.childNodes[i].classList.contains('color').offsetLeft > 0);
+            //
+            //        //if (parseInt(handle.childNodes[i].offsetLeft) < 0) {
+            //        //    console.log(handle.childNodes[i].offsetLeft);
+            //        //    return false;
+            //        //}
+            //    }
+            //}
 
             return true;
         }
+
+        //isInStage:function(){
+        //    var whatblock = handle.getAttribute('data-block');
+        //    switch (whatblock){
+        //        case 'i':
+        //            if (parseInt(handle.style.left) < -20 || parseInt(handle.style.left) > 160) {
+        //                console.log('out');
+        //            }
+        //            break;
+        //        case 'j':
+        //            if (parseInt(handle.style.left) < 0 || parseInt(handle.style.left) > 160) {
+        //                console.log('out');
+        //            }
+        //            break;
+        //        case 'l':
+        //            if (parseInt(handle.style.left) < -20 || parseInt(handle.style.left) > 140) {
+        //                console.log('out');
+        //            }
+        //            break;
+        //        case 'o':
+        //            if (parseInt(handle.style.left) < 0 || parseInt(handle.style.left) > 160) {
+        //                console.log('out');
+        //            }
+        //            break;
+        //        case 's':
+        //            if (parseInt(handle.style.left) < 0 || parseInt(handle.style.left) > 140) {
+        //                console.log('out');
+        //            }
+        //            break;
+        //        case 't':
+        //            if (parseInt(handle.style.left) < 0 || parseInt(handle.style.left) > 140) {
+        //                console.log('out');
+        //            }
+        //            break;
+        //        case 'z':
+        //            if (parseInt(handle.style.left) < 0 || parseInt(handle.style.left) > 140) {
+        //                console.log('out');
+        //            }
+        //            break;
+        //    }
+        //
+        //    return true;
+        //}
     },
     check:{
         isCollision:function(){},
