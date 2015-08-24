@@ -43,11 +43,13 @@ var elCounter = function(){
 
     });
     var makeElement = function(what,classname){
-        var blobFrag = document.createDocumentFragment();
-
-        blobFrag = document.createElement(what);
-        document.body.appendChild(blobFrag);
-        blobFrag.classList.add(classname);
+        if (!document.querySelector("."+classname)){
+            var blobFrag = document.createDocumentFragment();
+            blobFrag = document.createElement(what);
+            document.body.appendChild(blobFrag);
+            blobFrag.classList.add(classname);
+            blobFrag.classList.add('hide');
+        }
     };
     var makeMove = function(what){
         var x = 0,
@@ -95,8 +97,8 @@ var elCounter = function(){
 
 };
 
-    elCounter.prototype = {
-};
+//    elCounter.prototype = {
+//};
 
 var test = new elCounter();
 
