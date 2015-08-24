@@ -38,13 +38,13 @@ var elCounter = function () {
 
     });
     var makeElement = function (what, classname) {
-        if (!document.querySelector("." + classname)) {
+        //if (!document.querySelector("." + classname)) {
             var blobFrag = document.createDocumentFragment();
             blobFrag = document.createElement(what);
             document.body.appendChild(blobFrag);
             blobFrag.classList.add(classname);
             blobFrag.classList.add('hide');
-        }
+        //}
     };
     var makeMove = function (what) {
         var x = 0,
