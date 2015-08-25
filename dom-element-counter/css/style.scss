@@ -1,0 +1,45 @@
+table {
+	border-collapse: collapse;
+
+	td { border:1px solid #ccc;}
+
+}
+$blob_color:#ccc;
+$blob_font_color: #000;
+$point_el_bg: #FF7F85;
+$point_elbrother_bg: #FFF8CE;
+
+.blob {
+	display: inline-block;
+	position: relative;
+	background-color: $blob_color;
+	font-size:11px;
+	padding:5px;
+	min-width:40px;
+	text-align: center;
+	height:15px;
+	line-height:15px;
+	color: $blob_font_color;
+
+	&:after {
+		content:"";
+		position: absolute;
+		left:50%;
+		top:27px;
+		margin-left:-6px;
+		margin-top:-8px;
+		width:12px;
+		height:12px;
+		background-color: $blob_color;
+		transform: rotate(45deg);
+	}
+	&.hide {
+		display: none;
+	}
+}
+.pointyou:hover {
+	background-color: $point_el_bg;
+}
+.pointyoufather:hover {
+	background-color: $point_elbrother_bg;
+}
