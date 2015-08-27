@@ -1,5 +1,7 @@
 /*
 * 자주 쓰는 js function 모음
+* 추가할 항목
+* input > 마우스, 키보드, 터치 등
 *
 * */
 var dom = dom | {};
@@ -8,6 +10,12 @@ var log = function(context){
     console.log(context);
 };
 
+ipt = {
+    //keydown, keyup
+    //click, mousemove,
+    //touchstart, touchmove
+    // disable preventDefault
+};
 dom = {
     get:function(name){
         return document.querySelector(name);
@@ -27,9 +35,29 @@ dom = {
     show:function(ele){
         ele.style.display = "";
     },
-    hasClassName:function(){},
-    addClassName:function(){},
-    removeClassName:function(){},
+    hasClassName:function(ele,className){
+        if (ele.classList) {
+            return ele.classList.contains(className);
+        } else {
+            var getClass = ele.getAttribute('class');
+            return (getClass === className);
+        }
+    },
+    addClassName:function(ele,className){
+        if (ele.classList) {
+            ele.classList.add(className);
+        } else {
+            var lastClass = ele.getAttribute('class');
+            if (ele.getAttribute('class')){
+                var className = lastClass+" "+className;
+            }
+            ele.setAttribute('class',className);
+        }
+
+    },
+    removeClassName:function(ele,className){
+
+    },
     toggleClassName:function(){},
     query:function(context,selector){
         return (context || document).querySelectorAll(selector);
@@ -42,9 +70,8 @@ dom = {
 var wr = dom.get('.wrapper');
 var ul = dom.get('ul');
 
-dom.on(wr,'mousemove',function(){console.log('clickclick')},false);
-dom.un(wr,'click',function(){console.log('un')},false);
+var all = dom.query(document,'a');
 
-//var wrapper = dom.query(document,'.wrapper');
-//log(wrapper);
-//dom.query(wrapper,'div');
+dom.addClassName(ul,'ululul');
+dom.addClassName(wr,'hay');
+//console.log(dom.hasClassName(wr,'wrapper'));
