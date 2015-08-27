@@ -110,22 +110,23 @@ dom = {
         }
     },
     toggleClassName:function(ele,className){
-        if (ele.classList) {
+        if (!ele.classList) {
             ele.classList.toggle(className);
         } else {
             var lastClass = ele.getAttribute('class');
             if (lastClass){
+
                 if (lastClass.match(className)){
                     dom.removeClassName(ele,className);
 
-                    // 클래스 없으면 class 어트리뷰트 지움
-                    if (ele.getAttribute('class') === ''){
-                        ele.removeAttribute('class');
-                    }
-                } else {
-                    dom.addClassName(ele,className);
                 }
+            } else {
+                dom.addClassName(ele,className);
             }
+        }
+        // 클래스 없으면 class 어트리뷰트 지움
+        if (ele.getAttribute('class') === ''){
+            ele.removeAttribute('class');
         }
     },
     query:function(context,selector){
@@ -175,3 +176,9 @@ dom = {
 //log(dom.whatBrowser());
 //log(dom.whatOS());
 //console.log(dom.hasClassName(wr,'wrapper'));
+
+
+var btn = dom.get('a');
+dom.on(btn,'click',function(){dom.toggleClassName(btn,'hihi')},false);
+
+
