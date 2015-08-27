@@ -1,11 +1,10 @@
 /*
 * 자주 쓰는 js function 모음
-* 추가할 항목
-* input > 마우스, 키보드, 터치 등
+* //추가할 항목
+* //input > 마우스, 키보드, 터치 등
 *
 * */
 var dom = dom | {};
-
 
 //console.log 길어..
 var log = function(context){
@@ -79,7 +78,7 @@ dom = {
         } else {
             var lastClass = ele.getAttribute('class');
             if (lastClass){
-                var className = lastClass+" "+className;
+                className = lastClass+" "+className;
             }
             ele.setAttribute('class',className);
         }
@@ -138,9 +137,6 @@ dom = {
     whatBrowser:function(){
         var agt = navigator.userAgent.toLowerCase();
 
-        //log(agt);
-        //if (dom.hasText(agt,"chrome")) return 'Chrome';
-
         if (agt.indexOf("chrome") != -1) return 'Chrome';
         if (agt.indexOf("opera") != -1) return 'Opera';
         if (agt.indexOf("firefox") != -1) return 'Firefox';
@@ -150,32 +146,31 @@ dom = {
     },
     whatOS:function(){
         var agt = navigator.userAgent.toLowerCase();
-        //log(agt);
+
         if (agt.indexOf("macintosh") != -1) return 'OSX';
         if (agt.indexOf("windows") != -1) return 'Win';
         if (agt.indexOf("Linux") != -1) return 'Linux';
         if (agt.indexOf("iOS") != -1) return 'iOS';
         if (agt.indexOf("Android") != -1) return 'Android';
-        // 리눅스?
     },
     evState:function(){}
 };
 
-var wr = dom.get('.wrapper');
-var ul = dom.get('ul');
-var all = dom.query(document,'a');
-
-dom.addClassName(ul,'ululul');
-dom.addClassName(ul,'test02');
-dom.addClassName(ul,'test03');
-dom.addClassName(wr,'hay');
-dom.removeClassName(ul,'ululul');
-
-dom.toggleClassName(ul,'test02');
-dom.toggleClassName(ul,'ululul');
-
-ipt();
-ipt(wr);
+//var wr = dom.get('.wrapper');
+//var ul = dom.get('ul');
+//var all = dom.query(document,'a');
+//
+//dom.addClassName(ul,'ululul');
+//dom.addClassName(ul,'test02');
+//dom.addClassName(ul,'test03');
+//dom.addClassName(wr,'hay');
+//dom.removeClassName(ul,'ululul');
+//
+//dom.toggleClassName(ul,'test02');
+//dom.toggleClassName(ul,'ululul');
+//
+//ipt();
+//ipt(wr);
 
 //log(dom.whatBrowser());
 //log(dom.whatOS());
