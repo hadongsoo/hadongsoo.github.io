@@ -1,8 +1,10 @@
 /*
 * 자주 쓰는 js function 모음
 * //추가할 항목
-* //input > 마우스, 키보드, 터치 등
-*
+* //0827 input > 마우스, 키보드, 터치 등
+* 추가할 항목
+* addevent 등은 즉시실행함수로 감싸고, 변수에 넣어서 한번만 분기를 타도록 한다
+* //0828 creatElement 추가하기
 * */
 var dom = dom | {};
 
@@ -53,10 +55,29 @@ dom = {
         return name.innerHTML = content;
     },
     on:function(ele,type,fn,capture){
-        ele.addEventListener(type, fn, capture);
+        if (ele.addEventListener) {
+            ele.addEventListener(type, fn, capture);
+        } else if (ele.attachEvent) {
+            ele.attachEvent("on"+type, fn);
+        } else {
+            ele["on"+type] = fn;
+        }
     },
     un:function(ele,type,fn,capture){
-        ele.removeEventListener(type, fn, capture);
+        if (ele.removeEventListener){
+            ele.removeEventListener(type, fn, capture);
+        } else if (ele.detachEvent) {
+            ele.detachEvent("on" + type, fn);
+        } else {
+            ele["on"+type] = null;
+        }
+    },
+    prevent: function ( event ) {
+        if ( event.preventDefault ) {
+            event.preventDefault();
+        } else {
+            event.returnValue = false;
+        }
     },
     hide:function(ele){
         ele.style.display = "none";
@@ -110,7 +131,7 @@ dom = {
         }
     },
     toggleClassName:function(ele,className){
-        if (!ele.classList) {
+        if (ele.classList) {
             ele.classList.toggle(className);
         } else {
             var lastClass = ele.getAttribute('class');
@@ -128,6 +149,15 @@ dom = {
         if (ele.getAttribute('class') === ''){
             ele.removeAttribute('class');
         }
+    },
+    make:function(tagName,className,where){
+        where = (where || document.body);
+        console.log(where);
+        var tagname = document.createElement(tagName);
+        if (className) {
+            dom.addClassName(tagname,className);
+        }
+        where.appendChild(tagname);
     },
     query:function(context,selector){
         return (context || document).querySelectorAll(selector);
@@ -157,7 +187,7 @@ dom = {
     evState:function(){}
 };
 
-//var wr = dom.get('.wrapper');
+var wr = dom.get('.wrapper');
 //var ul = dom.get('ul');
 //var all = dom.query(document,'a');
 //
@@ -178,7 +208,7 @@ dom = {
 //console.log(dom.hasClassName(wr,'wrapper'));
 
 
-var btn = dom.get('a');
-dom.on(btn,'click',function(){dom.toggleClassName(btn,'hihi')},false);
+//var btn = dom.get('a');
+//dom.on(btn,'click',function(){dom.toggleClassName(btn,'hihi')},false);
 
-
+dom.make('div','tests',wr);
