@@ -48,30 +48,57 @@ var ipt = function(){
     }
 };
 dom = {
-    get:function(name){
-        return document.querySelector(name);
+    init:function(){
+
+        // on, un 한번만 검증하도록 초기화에 포함
+        if (typeof window.addEventListener === 'function'){
+            dom.on = function(ele, type, fn, capture){
+                ele.addEventListener(type, fn, capture);
+            };
+            dom.un = function(ele, type, fn){
+                ele.removeEventListener(type,fn,false);
+            }
+        } else if (typeof document.attachEvent === 'function'){
+            dom.on = function(ele, type, fn){
+                ele.attachEvent('on'+type, fn);
+            };
+            dom.un = function(ele, type, fn) {
+                ele.detachEvent('on' + type, fn);
+            }
+        } else {
+            dom.on = function(ele,type,fn){
+                el['on'+type] = fn;
+            };
+            dom.un = function(ele, type, fn){
+                el['on'+type] = null;
+            }
+        }
+
+        // get 한번만 검증하도록 초기화에 포함
+        if (typeof document.querySelector === 'function'){
+            dom.get = function(name){
+                return document.querySelector(name);
+            }
+        } else {
+            dom.get = function(name){
+                var state = (name[0] === '.') ? 'class':'id';
+                name = name.slice(1);
+
+                if (state === 'class'){
+                    return document.getElementsByClassName(name)[0];
+                } else {
+                    return document.getElementById(name);
+                }
+            }
+        }
     },
+    get:null,
     set:function(name,content){
         return name.innerHTML = content;
     },
-    on:function(ele,type,fn,capture){
-        if (ele.addEventListener) {
-            ele.addEventListener(type, fn, capture);
-        } else if (ele.attachEvent) {
-            ele.attachEvent("on"+type, fn);
-        } else {
-            ele["on"+type] = fn;
-        }
-    },
-    un:function(ele,type,fn,capture){
-        if (ele.removeEventListener){
-            ele.removeEventListener(type, fn, capture);
-        } else if (ele.detachEvent) {
-            ele.detachEvent("on" + type, fn);
-        } else {
-            ele["on"+type] = null;
-        }
-    },
+    //addEventListener 여러번 읽게 되므로, init 초기화로 결정
+    on:null,
+    un:null,
     prevent: function ( event ) {
         if ( event.preventDefault ) {
             event.preventDefault();
@@ -152,7 +179,7 @@ dom = {
     },
     make:function(tagName,className,where){
         where = (where || document.body);
-        console.log(where);
+        //console.log(where);
         var tagname = document.createElement(tagName);
         if (className) {
             dom.addClassName(tagname,className);
@@ -187,7 +214,10 @@ dom = {
     evState:function(){}
 };
 
-var wr = dom.get('.wrapper');
+dom.init();
+
+
+//var wr = dom.get('.wrapper');
 //var ul = dom.get('ul');
 //var all = dom.query(document,'a');
 //
@@ -211,4 +241,8 @@ var wr = dom.get('.wrapper');
 //var btn = dom.get('a');
 //dom.on(btn,'click',function(){dom.toggleClassName(btn,'hihi')},false);
 
-dom.make('div','tests',wr);
+
+var wrr = dom.get('.wrapper');
+var rw = dom.get('#ulli');
+
+//dom.make('div','tests',wr);
