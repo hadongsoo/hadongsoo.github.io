@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="style.css"/>
+	<style>
+		button {
+			width: 200px;
+			height: 50px;
+		}
+		table {
+			border-collapse: collapse;
+			width: 100%;
+			height: 100%;
+		}
+		td:first-child,
+		th:first-child {
+			width: 150px;
+			text-align: right;
+			padding: 0 10px;
+		}
+		th,
+		td {
+			text-align: center;
+			border: 1px solid #ccc;
+		}
+		th {
+			background-color: #ccc;
+		}
+		td input {
+			border:0;
+			height:100%;
+		}
+	</style>
+</head>
+<body>
+	<table>
+		<thead>
+		<tr>
+			<th></th>
+			<th>월</th>
+			<th>화</th>
+			<th>수</th>
+			<th>목</th>
+			<th>금</th>
+			<th>토</th>
+			<th>일</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>수영</td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+		</tr>
+		<tr>
+			<td>홈짐</td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+		</tr>
+		<tr>
+			<td>아침</td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+		</tr>
+		<tr>
+			<td>점심</td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+		</tr>
+		<tr>
+			<td>저녁</td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+			<td><input type="text"/></td>
+
+		</tr>
+		</tbody>
+	</table>
+	<div class="wrapp" style="">
+		<button class="touch">일반터치</button>
+		<button class="touchDouble">더블터치</button>
+		<button class="touchLong">롱터치</button>
+		<span class="output">output</span>
+	</div>
+
+	<script src="hammer.js"></script>
+	<script src="touch.js"></script>
+	<script>
+		var docuheight = screen.availHeight ;
+		var docuwidth = screen.availWidth ;
+		console.log(docuheight, docuwidth);
+
+		var table = document.querySelector('table');
+		table.setAttribute('style','height:'+docuheight+'px');
+	</script>
+</body>
+</html>

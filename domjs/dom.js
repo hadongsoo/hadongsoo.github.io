@@ -3,8 +3,9 @@
 * //추가할 항목
 * //0827 input > 마우스, 키보드, 터치 등
 * 추가할 항목
-* addevent 등은 즉시실행함수로 감싸고, 변수에 넣어서 한번만 분기를 타도록 한다
+* //0828 addevent 등은 즉시실행함수로 감싸고, 변수에 넣어서 한번만 분기를 타도록 한다
 * //0828 creatElement 추가하기
+* 콘솔로그 여러값도 작동하도록 arguments 활용하기
 * */
 var dom = dom | {};
 
@@ -75,19 +76,25 @@ dom = {
         }
 
         // get 한번만 검증하도록 초기화에 포함
-        if (typeof document.querySelector === 'function'){
+        if (typeof document.querySelector !== 'function'){
             dom.get = function(name){
                 return document.querySelector(name);
             }
         } else {
             dom.get = function(name){
-                var state = (name[0] === '.') ? 'class':'id';
-                name = name.slice(1);
+                var state;
+s
+                if (name[0] === '.' || name[0] === '#') {
+                    state = (name[0] === '.') ? 'class':'id';
+                    name = name.slice(1);
+                }
 
                 if (state === 'class'){
                     return document.getElementsByClassName(name)[0];
-                } else {
+                } else if ( state === 'id'){
                     return document.getElementById(name);
+                } else { //바로 태그 일때
+                    return document.getElementsByTagName(name);
                 }
             }
         }
